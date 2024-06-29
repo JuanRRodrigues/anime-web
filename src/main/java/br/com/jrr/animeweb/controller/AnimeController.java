@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/animes")
+@RequestMapping("/juan")
 public class AnimeController {
 
     @Autowired
@@ -26,13 +26,13 @@ public class AnimeController {
             var anime = repository.getReferenceById(id);
             model.addAttribute("anime", anime);
         }
-        return "animes/form";
+        return "juan/form";
     }
 
     @GetMapping
     public String loadingPageListing(Model model){
         model.addAttribute("list", repository.findAll());
-        return "animes/listing";
+        return "juan/listing";
     }
 
     @PostMapping
@@ -41,7 +41,7 @@ public class AnimeController {
         var anime = new Anime(data);
 
         repository.save(anime);
-        return "redirect:/animes";
+        return "redirect:/juan";
     }
 
     @PutMapping
@@ -50,7 +50,7 @@ public class AnimeController {
         var anime = repository.getReferenceById(data.id());
         anime.editData(data);
 
-        return "redirect:/animes";
+        return "redirect:/juan";
     }
 
     @DeleteMapping
@@ -58,6 +58,6 @@ public class AnimeController {
     public String deleteAnime(Long id){
         repository.deleteById(id);
 
-        return "redirect:/animes";
+        return "redirect:/juan";
     }
 }
