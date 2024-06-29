@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}"
+>
+<head>
+    <title>Listing Anime</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>List of Anime</h1>
+    <a href="/animes/form">New</a>
+    <table>
+        <thead>
+        <tr>
+            <th>NAME</th>
+            <th>DURATION</th>
+            <th>YEAR</th>
+            <th>GENRE</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+         <tr th:each="anime : ${list}">
+            <td th:text="${anime.name}"></td>
+            <td th:text="${anime.duration}"></td>
+            <td th:text="${anime.year}"></td>
+            <td th:text="${anime.genre}"></td>
+            <td>
+                <a th:href="@{/animes/form?id={id}(id=${anime.id})}">Edit</a>
+
+                <form action="/animes" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="id" th:value="${anime.id}">
+
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+         </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
